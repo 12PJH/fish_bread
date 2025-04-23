@@ -8,7 +8,6 @@ stock = { #key값을 이용해서 Value를 찾을 수 있다. {ket:Value구조}
     "초코붕어빵" : 5
     }
 
-
 sales = {
     "팥붕어빵" : 0,
     "슈크림붕어빵" : 0,
@@ -16,7 +15,7 @@ sales = {
     }
 
 
-
+#붕어빵 주문 기능
 def order_bread():
     while True:
         bread_type = input("주문할 붕어빵을 선택해주세요(팥붕어빵, 슈크림붕어빵, 초코붕어빵) : , 뒤로가길 원하시면 뒤로가기를 입력해주세요.")
@@ -31,7 +30,8 @@ def order_bread():
             #i = i + 1 => i += 1
             #딕셔너리의 키값을 넣으면 딕셔너리의 벨류가 나온다.
                 sales[bread_type] += bread_count
-                print(f"{bread_type} {bread_count}개가 판매되었습니다.")
+                print(f"주문해주셔서 감사합니다.")
+                print(f"{bread_type}의 재고가 현재{stock[bread_type]}개 입니다.")
                 break
             else:
                 print(f"재고가 부족합니다. 현재 {stock[bread_type]}개만 주문 가능합니다.")
@@ -39,7 +39,22 @@ def order_bread():
             print("없는 메뉴 입니다. 다시 주문해주세요!!!")
     
 
+#붕어빵 admin 기능
+def admin_mode():
+    while True:
+        bread_type = input("추가하고자 하는 맛을 입력하세요, 추가가 끝이시면 종료를 입력해주세요.:")
+        if bread_type in stock:
+            bread_count = int(input("추가하실 개수를 입력하세요:"))
+            stock[bread_type] += bread_count
+            print(f"{bread_type}의 재고가{bread_count}개 추가 되어, 현재{stock[bread_type]}개 입니다.")
+        elif bread_type == "종료":
+            break
+        else:
+            print("없는 종류입니다. 다시 입력해주세요 :")
 
+
+
+#붕어빵 메인 화면
 while True:
     mode = input("원하는 모드를 선택하세요(주문, 관리자, 종료):")
     #입력받은 값에 따라 밑으로 내려가면서 반응한다.
@@ -49,4 +64,4 @@ while True:
     elif mode == "주문":
         order_bread()
     elif mode == "관리자":
-        admin_mode()        
+        admin_mode()
