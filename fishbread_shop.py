@@ -14,6 +14,12 @@ sales = {
     "초코붕어빵" : 0
     }
 
+price = {
+    "팥붕어빵" : 1000,
+    "슈크림붕어빵" : 1200,
+    "초코붕어빵" : 1500
+}
+
 
 #붕어빵 주문 기능
 def order_bread():
@@ -53,6 +59,16 @@ def admin_mode():
             print("없는 종류입니다. 다시 입력해주세요 :")
 
 
+#붕어빵 가격 계산 기능
+def total_price():
+    #고급반 total_sales = sum(sales [key] * price [key] for key in sales) #items 매우 많이 중요
+    #딕셔너리를 for문에 넣으면 하나씩 데이터를 가져오는데 이 데이터는 key값을 가져온다.
+    total = 0
+    for key in sales:
+        total += (sales[key] * price[key])
+    print(f"오늘의 총 매출액은 {total}원 입니다.")
+
+
 
 #붕어빵 메인 화면
 while True:
@@ -60,6 +76,8 @@ while True:
     #입력받은 값에 따라 밑으로 내려가면서 반응한다.
     #맞는 값이 나오면 그 줄의 함수를 호출해서 위로 올라간다.
     if mode == "종료":
+        total_price()
+        print("시스템을 종료합니다.")
         break
     elif mode == "주문":
         order_bread()
